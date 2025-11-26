@@ -1,0 +1,65 @@
+# required packages
+required_packages <- c("ggplot2", "dplyr")
+
+library(ggplot2)
+library(dplyr)
+
+# Data prep
+data <- mtcars
+data$car <- rownames(mtcars)
+data$cyl <- as.factor(data$cyl)
+
+# Create output directory for plots
+out_dir <- "plots"
+if (!dir.exists(out_dir)) dir.create(out_dir, showWarnings = FALSE)
+
+# Scatterplot: Horsepower vs MPG
+plot_hp_mpg <- ggplot(data, aes(x = hp, y = mpg)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(
+    title = "Horsepower vs MPG",
+    x = "Horsepower",
+    y = "Miles Per Gallon"
+  ) +
+  theme_minimal()
+print(plot_hp_mpg)
+ggsave(filename = file.path(out_dir, "hp_vs_mpg.png"), plot = plot_hp_mpg, width = 7, height = 5, dpi = 300)
+
+# Histogram of MPG
+plot_hist_mpg <- ggplot(data, aes(x = mpg)) +
+  geom_histogram(binwidth = 3, fill = "green") +
+  labs(
+    title = "Distribution of Miles Per Gallon",
+    x = "MPG",
+    y = "Count"
+  ) +
+  theme_minimal()
+print(plot_hist_mpg)
+ggsave(filename = file.path(out_dir, "mpg_histogram.png"), plot = plot_hist_mpg, width = 7, height = 5, dpi = 300)
+
+# Boxplot of MPG by number of cylinders
+plot_box_cyl <- ggplot(data, aes(x = cyl, y = mpg, fill = cyl)) +
+  geom_boxplot() +
+  labs(
+    title = "MPG by Cylinder Count",
+    x = "Cylinders",
+    y = "MPG"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2")
+print(plot_box_cyl)
+ggsave(filename = file.path(out_dir, "mpg_by_cyl_boxplot.png"), plot = plot_box_cyl, width = 7, height = 5, dpi = 300)
+
+# Summary statistics
+mpg_summary <- data %>%
+  group_by(cyl) %>%
+  summarize(
+    Avg_MPG = mean(mpg),
+    Min_MPG = min(mpg),
+    Max_MPG = max(mpg),
+    .groups = "drop"
+  )
+
+message("=== MPG SUMMARY BY CYLINDER COUNT ===")
+print(mpg_summary)
