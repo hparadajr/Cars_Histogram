@@ -31,22 +31,8 @@
 
 ## Example R script
 ```r
-# r2.R
-# Generates three ggplot2 plots from the mtcars dataset and prints MPG summary by cylinder.
-
+# required packages
 required_packages <- c("ggplot2", "dplyr")
-
-install_if_missing <- function(pkgs) {
-  for (p in pkgs) {
-    if (!suppressWarnings(require(p, character.only = TRUE))) {
-      message(sprintf("Package '%s' is not installed. Installing now...", p))
-      install.packages(p, repos = "https://cloud.r-project.org")
-      library(p, character.only = TRUE)
-    }
-  }
-}
-
-install_if_missing(required_packages)
 
 library(ggplot2)
 library(dplyr)
@@ -60,7 +46,7 @@ data$cyl <- as.factor(data$cyl)
 out_dir <- "plots"
 if (!dir.exists(out_dir)) dir.create(out_dir, showWarnings = FALSE)
 
-# 1 — Scatterplot: Horsepower vs MPG
+# Scatterplot: Horsepower vs MPG
 plot_hp_mpg <- ggplot(data, aes(x = hp, y = mpg)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
@@ -70,11 +56,10 @@ plot_hp_mpg <- ggplot(data, aes(x = hp, y = mpg)) +
     y = "Miles Per Gallon"
   ) +
   theme_minimal()
-
 print(plot_hp_mpg)
 ggsave(filename = file.path(out_dir, "hp_vs_mpg.png"), plot = plot_hp_mpg, width = 7, height = 5, dpi = 300)
 
-# 2 — Histogram of MPG
+# Histogram of MPG
 plot_hist_mpg <- ggplot(data, aes(x = mpg)) +
   geom_histogram(binwidth = 3, fill = "green") +
   labs(
@@ -83,11 +68,10 @@ plot_hist_mpg <- ggplot(data, aes(x = mpg)) +
     y = "Count"
   ) +
   theme_minimal()
-
 print(plot_hist_mpg)
 ggsave(filename = file.path(out_dir, "mpg_histogram.png"), plot = plot_hist_mpg, width = 7, height = 5, dpi = 300)
 
-# 3 — Boxplot of MPG by number of cylinders
+# Boxplot of MPG by number of cylinders
 plot_box_cyl <- ggplot(data, aes(x = cyl, y = mpg, fill = cyl)) +
   geom_boxplot() +
   labs(
@@ -97,11 +81,10 @@ plot_box_cyl <- ggplot(data, aes(x = cyl, y = mpg, fill = cyl)) +
   ) +
   theme_minimal() +
   scale_fill_brewer(palette = "Set2")
-
 print(plot_box_cyl)
 ggsave(filename = file.path(out_dir, "mpg_by_cyl_boxplot.png"), plot = plot_box_cyl, width = 7, height = 5, dpi = 300)
 
-# --- Summary statistics ---
+# Summary statistics
 mpg_summary <- data %>%
   group_by(cyl) %>%
   summarize(
