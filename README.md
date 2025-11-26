@@ -115,7 +115,7 @@ message("=== MPG SUMMARY BY CYLINDER COUNT ===")
 print(mpg_summary)
 ```
 
-## Results (from the above run)
+## Results
 ```
 === MPG SUMMARY BY CYLINDER COUNT ===
 # A tibble: 3 × 4
