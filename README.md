@@ -116,29 +116,6 @@ print(mpg_summary)
 ```
 
 ## Results (from the above run)
-The run produced three PNG files (saved to `plots/`) and printed the MPG summary by cylinder. Below are the relevant results.
-
-Saved plot files:
-- plots/hp_vs_mpg.png      (Image 1)
-- plots/mpg_histogram.png  (Image 2)
-- plots/mpg_by_cyl_boxplot.png (Image 3)
-
-Embedded outputs (if the images are present in `plots/`, they will render inline on GitHub):
-
-Image 1 — Horsepower vs MPG (scatterplot with linear fit)
-
-<img src="plots/hp_vs_mpg.png" alt="Image 1 — Horsepower vs MPG" style="max-width:100%;height:auto;" />
-
-Image 2 — Distribution of Miles Per Gallon (histogram)
-
-<img src="plots/mpg_histogram.png" alt="Image 2 — Distribution of Miles Per Gallon" style="max-width:100%;height:auto;" />
-
-Image 3 — MPG by Cylinder Count (boxplots)
-
-<img src="plots/mpg_by_cyl_boxplot.png" alt="Image 3 — MPG by Cylinder Count" style="max-width:100%;height:auto;" />
-
-Console summary (exact text printed during the run):
-
 ```
 === MPG SUMMARY BY CYLINDER COUNT ===
 # A tibble: 3 × 4
