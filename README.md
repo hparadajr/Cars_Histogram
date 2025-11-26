@@ -1,7 +1,7 @@
 # mtcars Plotting Script
 
 ## Dataset
-- Built-in R dataset: `mtcars`
+- The mtcars dataset comes built into R and originates from the 1974 Motor Trend US magazine.
 - Contains fuel consumption and 10 aspects of automobile design and performance for 32 automobiles between the years 1973–1974
 - Columns used in the script:
   - mpg — Miles/(US) gallon
